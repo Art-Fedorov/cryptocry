@@ -1,3 +1,7 @@
+<?php
+header('Access-Control-Allow-Origin: *'); 
+$homepage = file_get_contents('https://bittrex.com/api/v1.1/public/getmarkethistory?market=BTC-ETC');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,8 +9,8 @@
   <meta charset="UTF-8">
   <title>магия</title>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script> -->
   <script src="main.js"></script>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
@@ -24,38 +28,16 @@
         </div>
       </div>
 
-      <table class="table" id="main-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr>
-        </tbody>
-      </table>
+      <div id="table"></div>
+  <script>
+    $(document).ready(function(){
+      var jsonArray = <?php echo $homepage; ?>;
+      $.jsontotable(jsonArray.result, { id: '#table', className: 'table table-hover' });
+    });
+  </script>
     </div>
   </div>
+  
 </body>
 
 </html>
