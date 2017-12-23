@@ -1,3 +1,13 @@
 .wrapper{
   margin: 30px auto;
 }
+
+.table{
+
+}
+.table__red{
+  background-color: #FFCDD2;
+}
+.table__green{
+  background-color: #C8E6C9;
+}
