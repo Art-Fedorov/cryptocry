@@ -1,6 +1,6 @@
 <?php
 header('Access-Control-Allow-Origin: *');
-$url = null;
+$url = 'https://bittrex.com/api/v1.1/public/getmarkethistory?market=BTC-ETC';
 if (isset($_POST['url'])){
   $url = $_POST['url'];
 }
@@ -51,7 +51,12 @@ if ($url != null)
     $(document).ready(function(){
       var jsonArray = <?php echo $content; ?>;
       $.jsontotable(jsonArray.result, { id: '#table', className: 'table table-hover' });
-      $('#table tr').each(function(key,val){
+      $('#table thead tr').each(function(key,val){
+        var total = $(val).find('th:eq(4)');
+        var fillType = $(val).find('th:eq(5)');
+        fillType.swap(total);
+      });
+      $('#table tbody tr').each(function(key,val){
         var total = $(val).find('td:eq(4)');
         var fillType = $(val).find('td:eq(5)');
         fillType.swap(total);
